@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="km">
+<head>
+<meta charset="utf-8">
+<title>LEAP Christmas Concert Flyer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Moul&family=Kantumruy+Pro:wght@400;500;700&family=Playfair+Display:ital,wght@0,700;0,900;1,500&display=swap" rel="stylesheet">
+<style>
+  /* Layout: A5 portrait (148x210mm). Deep green field, gold type, one red seal.
+     Top: school + title. Middle: staff with notes + event details. Bottom: perks + contact. */
+  :root{
+    --green:#0f3b2e; --green2:#164c3b; --gold:#e9c46a; --cream:#fbf3e0; --red:#c8312b;
+    --font-kh-display:'Moul','Kantumruy Pro',serif;
+    --font-kh:'Kantumruy Pro','Noto Sans Khmer',sans-serif;
+    --font-en:'Playfair Display',Georgia,serif;
+  }
+  @page{size:148mm 210mm;margin:0}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:#555}
+  body{display:flex;justify-content:center;padding:0}
+  .flyer{
+    position:relative;width:148mm;height:210mm;overflow:hidden;
+    background:
+      radial-gradient(circle at 50% 0%,var(--green2),var(--green) 70%);
+    color:var(--cream);font-family:var(--font-kh);
+    padding:8mm 10mm 9mm;display:flex;flex-direction:column;gap:4.2mm;
+  }
+  .frame{position:absolute;inset:4mm;border:.5mm solid var(--gold);border-radius:3mm;pointer-events:none}
+  .frame::after{content:"";position:absolute;inset:1.2mm;border:.2mm solid rgba(233,196,106,.5);border-radius:2mm}
+  .snow{position:absolute;inset:0;pointer-events:none}
+
+  .brand{display:flex;align-items:center;justify-content:center;gap:3mm;font-size:3.3mm;letter-spacing:.35mm;color:var(--gold);text-transform:uppercase;font-weight:700}
+  .brand i{flex:0 0 14mm;height:.3mm;background:var(--gold);opacity:.7}
+
+  .title{text-align:center;display:flex;flex-direction:column;align-items:center;gap:1.5mm}
+  .kh-title{font-family:var(--font-kh-display);font-size:10.5mm;line-height:1.3;color:var(--gold);text-shadow:0 .6mm 0 rgba(0,0,0,.35)}
+  .en-title{font-family:var(--font-en);font-weight:900;font-size:8.5mm;line-height:1;letter-spacing:.2mm;color:var(--cream)}
+  .en-title em{font-style:italic;font-weight:500;color:var(--gold)}
+  .tag{font-size:3.6mm;color:var(--cream);opacity:.92;margin-top:1mm}
+
+  .staff{position:relative;height:14mm;margin:0 2mm}
+  .staff svg{width:100%;height:100%;display:block}
+
+  .when{
+    background:var(--cream);color:var(--green);border-radius:3mm;
+    padding:3.6mm 5mm;display:grid;grid-template-columns:1fr 1fr;gap:3mm 4mm;position:relative;
+  }
+  .when .cell small{display:block;font-size:2.6mm;letter-spacing:.3mm;text-transform:uppercase;color:var(--red);font-weight:700}
+  .when .cell b{display:block;font-size:4.6mm;line-height:1.3;font-weight:700}
+  .when .cell span{display:block;font-family:var(--font-en);font-style:italic;font-size:3.1mm;opacity:.75}
+  .when .wide{grid-column:1/-1;border-top:.25mm dashed rgba(15,59,46,.35);padding-top:2.5mm}
+  .ph{background:rgba(200,49,43,.12);border-bottom:.3mm dashed var(--red);padding:0 .8mm}
+  .free{
+    position:absolute;right:-3mm;top:-5mm;width:19mm;height:19mm;border-radius:50%;
+    background:var(--red);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;transform:rotate(10deg);box-shadow:0 .8mm 2mm rgba(0,0,0,.35);border:.5mm solid var(--gold);
+    line-height:1.15;font-weight:700;font-size:3mm;
+  }
+  .free span{font-family:var(--font-en);font-size:3.4mm;font-weight:900;letter-spacing:.2mm}
+
+  .perks{display:grid;grid-template-columns:repeat(3,1fr);gap:2.5mm;text-align:center}
+  .perk{border:.25mm solid rgba(233,196,106,.6);border-radius:2.5mm;padding:2.6mm 1.5mm;display:flex;flex-direction:column;gap:.8mm;align-items:center}
+  .perk svg{width:6mm;height:6mm}
+  .perk b{font-size:3.2mm;line-height:1.3;color:var(--gold)}
+  .perk span{font-size:2.5mm;font-family:var(--font-en);font-style:italic;opacity:.85;line-height:1.2}
+
+  .offer{
+    text-align:center;border-radius:2.5mm;padding:2.4mm 3mm;
+    background:linear-gradient(90deg,transparent,rgba(233,196,106,.2),transparent);
+    font-size:3.5mm;line-height:1.45;
+  }
+  .offer b{color:var(--gold)}
+  .offer span{display:block;font-family:var(--font-en);font-style:italic;font-size:3mm;opacity:.9}
+
+  .inst{display:flex;flex-wrap:wrap;justify-content:center;gap:1.5mm 2.5mm;font-size:2.9mm;color:var(--gold);font-weight:500}
+  .inst li{list-style:none}
+  .inst li+li::before{content:"♪";margin-right:2.5mm;opacity:.7}
+
+  .contact{margin-top:auto;display:grid;grid-template-columns:1fr auto;gap:3mm;align-items:end;border-top:.25mm solid rgba(233,196,106,.5);padding-top:3mm}
+  .contact div{font-size:3mm;line-height:1.45}
+  .contact b{color:var(--gold)}
+  .qr{width:15mm;height:15mm;border:.3mm dashed var(--gold);border-radius:1.5mm;display:flex;align-items:center;justify-content:center;font-size:2.2mm;text-align:center;color:var(--gold);line-height:1.2}
+
+  @media screen{ body{padding:8mm 0} .flyer{box-shadow:0 2mm 10mm rgba(0,0,0,.5)} }
+  @media print{ html,body{background:none} body{padding:0} .ph{background:none;border:0} }
+</style>
+</head>
+<body>
+<main class="flyer">
+  <div class="frame"></div>
+
+  <!-- falling snow + stars -->
+  <svg class="snow" viewBox="0 0 148 210" preserveAspectRatio="none" aria-hidden="true">
+    <g fill="#fbf3e0" opacity=".55">
+      <circle cx="14" cy="22" r=".9"/><circle cx="130" cy="16" r="1.1"/><circle cx="24" cy="58" r=".7"/>
+      <circle cx="126" cy="62" r=".8"/><circle cx="12" cy="96" r="1"/><circle cx="136" cy="100" r=".7"/>
+      <circle cx="20" cy="132" r=".8"/><circle cx="132" cy="140" r="1"/><circle cx="8" cy="172" r=".7"/>
+      <circle cx="140" cy="178" r=".9"/><circle cx="34" cy="14" r=".6"/><circle cx="112" cy="40" r=".6"/>
+    </g>
+    <g fill="#e9c46a">
+      <path d="M22 34l1.2 3 3 1.2-3 1.2L22 42.4l-1.2-3-3-1.2 3-1.2z"/>
+      <path d="M126 36l1.2 3 3 1.2-3 1.2-1.2 3-1.2-3-3-1.2 3-1.2z"/>
+      <path d="M118 112l.9 2.2 2.2.9-2.2.9-.9 2.2-.9-2.2-2.2-.9 2.2-.9z"/>
+    </g>
+  </svg>
+
+  <div class="brand"><i></i>LEAP School Cambodia · សាលាតន្ត្រី<i></i></div>
+
+  <header class="title">
+    <div class="kh-title">ពិធីប្រគំតន្ត្រី<br>ណូអែល</div>
+    <div class="en-title">Christmas <em>Concert</em></div>
+    <p class="tag">រដូវនៃសំឡេងភ្លេង រដូវនៃសេចក្តីស្រលាញ់<br><span style="font-family:var(--font-en);font-style:italic;opacity:.85">A season of music, a season of joy</span></p>
+  </header>
+
+  <div class="staff" aria-hidden="true">
+    <svg viewBox="0 0 120 20" preserveAspectRatio="none">
+      <g stroke="#e9c46a" stroke-width=".25" opacity=".8">
+        <line x1="0" y1="4" x2="120" y2="4"/><line x1="0" y1="8" x2="120" y2="8"/>
+        <line x1="0" y1="12" x2="120" y2="12"/><line x1="0" y1="16" x2="120" y2="16"/>
+      </g>
+      <g fill="#fbf3e0" stroke="#fbf3e0" stroke-width=".5">
+        <ellipse cx="14" cy="14" rx="2.3" ry="1.7" transform="rotate(-20 14 14)"/><line x1="16" y1="13.4" x2="16" y2="3"/>
+        <ellipse cx="30" cy="10" rx="2.3" ry="1.7" transform="rotate(-20 30 10)"/><line x1="32" y1="9.4" x2="32" y2="-1"/>
+        <ellipse cx="46" cy="6" rx="2.3" ry="1.7" transform="rotate(-20 46 6)"/><line x1="48" y1="5.4" x2="48" y2="-3"/>
+        <ellipse cx="62" cy="10" rx="2.3" ry="1.7" transform="rotate(-20 62 10)"/><line x1="64" y1="9.4" x2="64" y2="-1"/>
+        <ellipse cx="78" cy="14" rx="2.3" ry="1.7" transform="rotate(-20 78 14)"/><line x1="80" y1="13.4" x2="80" y2="3"/>
+        <ellipse cx="94" cy="8" rx="2.3" ry="1.7" transform="rotate(-20 94 8)"/><line x1="96" y1="7.4" x2="96" y2="-3"/>
+        <ellipse cx="108" cy="12" rx="2.3" ry="1.7" transform="rotate(-20 108 12)"/><line x1="110" y1="11.4" x2="110" y2="1"/>
+      </g>
+      <path d="M2 4c4-3 4 3 0 5 3 1 3 6 0 7" fill="none" stroke="#e9c46a" stroke-width=".6"/>
+    </svg>
+  </div>
+
+  <section class="when">
+    <div class="free">ចូលរួម<span>FREE</span>ឥតគិតថ្លៃ</div>
+    <div class="cell"><small>ថ្ងៃ / Date</small><b><span class="ph" style="font-family:inherit;font-style:normal;font-size:inherit;opacity:1;display:inline">ថ្ងៃទី __ ខែធ្នូ ២០២៦</span></b><span>December __, 2026</span></div>
+    <div class="cell"><small>ម៉ោង / Time</small><b><span class="ph" style="font-family:inherit;font-style:normal;font-size:inherit;opacity:1;display:inline">ម៉ោង __:__ ល្ងាច</span></b><span>__:__ PM</span></div>
+    <div class="cell wide"><small>ទីកន្លែង / Venue</small><b><span class="ph" style="font-family:inherit;font-style:normal;font-size:inherit;opacity:1;display:inline">សាលា LEAP School Cambodia · អាសយដ្ឋាន ______</span></b></div>
+  </section>
+
+  <section class="perks">
+    <div class="perk">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#e9c46a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg>
+      <b>ការសម្តែងរបស់សិស្ស</b><span>Student performances</span>
+    </div>
+    <div class="perk">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#e9c46a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6L12 16.7 6.7 19.6l1.1-6L3.4 9.4l6-.8z"/></svg>
+      <b>បទចម្រៀងណូអែល</b><span>Christmas favourites</span>
+    </div>
+    <div class="perk">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#e9c46a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17.5" cy="9" r="2.3"/><path d="M16.5 14.2c2.8-.3 5 1.8 5 4.8"/></svg>
+      <b>ជួបគ្រូ និងមើលសាលា</b><span>Meet our teachers</span>
+    </div>
+  </section>
+
+  <section class="offer">
+    <b>មេរៀនសាកល្បងឥតគិតថ្លៃ</b> សម្រាប់អ្នកចុះឈ្មោះក្នុងថ្ងៃកម្មវិធី
+    <span>Free trial lesson when you enrol on the night</span>
+  </section>
+
+  <ul class="inst">
+    <li>ព្យាណូ Piano</li><li>ហ្គីតា Guitar</li><li>វីយូឡុង Violin</li><li>ស្គរ Drums</li><li>ចម្រៀង Vocal</li>
+  </ul>
+
+  <footer class="contact">
+    <div>
+      <b>ទូរស័ព្ទ / Tel:</b> <span class="ph">0__ ___ ___</span> (Telegram)<br>
+      <b>Facebook:</b> <span class="ph">LEAP School Cambodia</span><br>
+      <b>អាសយដ្ឋាន:</b> <span class="ph">______, ភ្នំពេញ</span>
+    </div>
+    <div class="qr">QR<br>កូដ</div>
+  </footer>
+</main>
+</body>
+</html>
